@@ -16,7 +16,7 @@
 	 * Adds simple menu item + settings page to admin dashboard.
 	 */
 	function hello_dolly_admin_menu() {
-		add_object_page(
+		add_menu_page(
 			__('Hello Dolly', 'hello-dolly'),
 			__('Hello Dolly', 'hello-dolly'),
 			'manage_options',
