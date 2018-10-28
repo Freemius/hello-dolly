@@ -373,7 +373,7 @@
 		{
 			self::$_static_logger->entrance();
 
-			$hook = add_object_page(
+			$hook = add_menu_page(
 				__('Freemius Debug', WP_FS__SLUG),
 				__('Freemius Debug', WP_FS__SLUG),
 				'manage_options',
