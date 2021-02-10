@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.4
 	 */
 
@@ -11,21 +11,19 @@
 	}
 
 	class FS_Scope_Entity extends FS_Entity {
+		/**
+		 * @var string
+		 */
 		public $public_key;
+		/**
+		 * @var string
+		 */
 		public $secret_key;
 
 		/**
 		 * @param bool|stdClass $scope_entity
 		 */
-		function __construct( $scope_entity = false )
-		{
-			if (!($scope_entity instanceof stdClass))
-				return;
-
-			parent::__construct($scope_entity);
-
-			$this->public_key = $scope_entity->public_key;
-			if (isset($scope_entity->secret_key))
-				$this->secret_key = $scope_entity->secret_key;
+		function __construct( $scope_entity = false ) {
+			parent::__construct( $scope_entity );
 		}
 	}

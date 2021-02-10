@@ -2,8 +2,8 @@
 Contributors: freemius
 Tags: dummy, plugin
 Requires at least: 2.8
-Tested up to: 4.0
-Stable tag: 1.6
+Tested up to: 5.6
+Stable tag: 1.7.2
 License: GPLv2
 
 Freemius test plugin description.

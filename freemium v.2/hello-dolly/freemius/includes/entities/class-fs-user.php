@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.3
 	 */
 
@@ -11,39 +11,69 @@
 	}
 
 	class FS_User extends FS_Scope_Entity {
-		public $email;
-		public $first;
-		public $last;
-		public $is_verified;
+
+		#region Properties
 
 		/**
-		 * @param stdClass|bool $user
+		 * @var string
+		 */
+		public $email;
+		/**
+		 * @var string
+		 */
+		public $first;
+		/**
+		 * @var string
+		 */
+		public $last;
+		/**
+		 * @var bool
+		 */
+		public $is_verified;
+		/**
+         * @author Leo Fajardo (@leorw)
+         * @since 2.3.0
+         *
+		 * @var bool
+		 */
+		public $is_beta;
+		/**
+		 * @var string|null
+		 */
+		public $customer_id;
+		/**
+		 * @var float
+		 */
+		public $gross;
+
+		#endregion Properties
+
+		/**
+		 * @param object|bool $user
 		 */
 		function __construct( $user = false ) {
-			if ( ! ( $user instanceof stdClass ) ) {
-				return;
-			}
-
 			parent::__construct( $user );
-
-			$this->email       = $user->email;
-			$this->first       = $user->first;
-			$this->last        = $user->last;
-			$this->is_verified = $user->is_verified;
 		}
 
-		function get_name()
-		{
-			return trim(ucfirst(trim(is_string($this->first) ? $this->first : '')) . ' ' . ucfirst(trim(is_string($this->last) ? $this->last : '')));
+		function get_name() {
+			return trim( ucfirst( trim( is_string( $this->first ) ? $this->first : '' ) ) . ' ' . ucfirst( trim( is_string( $this->last ) ? $this->last : '' ) ) );
 		}
 
-		function is_verified()
-		{
-			return (isset($this->is_verified) && true === $this->is_verified);
+		function is_verified() {
+			return ( isset( $this->is_verified ) && true === $this->is_verified );
 		}
 
-		static function get_type()
-		{
+        /**
+         * @author Leo Fajardo (@leorw)
+         * @since 2.3.0
+         *
+         * @return bool
+         */
+		function is_beta() {
+			return ( isset( $this->is_beta ) && true === $this->is_beta );
+		}
+
+		static function get_type() {
 			return 'user';
 		}
 	}

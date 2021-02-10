@@ -2,7 +2,7 @@
 	/**
 	 * @package     Freemius
 	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+	 * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License Version 3
 	 * @since       1.0.6
 	 */
 
@@ -10,7 +10,8 @@
 		exit;
 	}
 
-	class FS_License_Manager /*extends FS_Abstract_Manager*/ {
+	class FS_License_Manager /*extends FS_Abstract_Manager*/
+	{
 //
 //
 //		/**
@@ -87,9 +88,12 @@
 		 * @return bool
 		 */
 		static function has_premium_license( $licenses ) {
-			if (is_array($licenses)) {
+			if ( is_array( $licenses ) ) {
 				foreach ( $licenses as $license ) {
-					if ( !$license->is_utilized() && $license->is_features_enabled() ) {
+					/**
+					 * @var FS_Plugin_License $license
+					 */
+					if ( ! $license->is_utilized() && $license->is_features_enabled() ) {
 						return true;
 					}
 				}
