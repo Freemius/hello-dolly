@@ -1,0 +1,33 @@
+// Aded svg-flag-image block styles here
+
+.edit-post-sidebar h2.flag-select-header {
+  margin: 0 0 -12px 0;
+}
+
+.dashicons-image-rotate {
+  cursor: pointer;
+}
+
+.flag-dimensions-toggle .components-base-control__help {
+  margin-bottom: 0;
+}
+
+.components-panel__row.flag-size-row .components-base-control {
+  margin-bottom: 10px;
+}
+.components-panel__row.flag-size-row .components-base-control:last-child {
+  margin-left: 6px;
+}
+
+.components-panel__body.captions-panel .tooltip-text-row {
+  margin-top: 10px;
+}
+
+// Inspector panel row styles
+// .block-editor-block-inspector .components-panel__row.rowRandomFlag {
+//   margin-top: -14px;
+// }
+
+// .components-panel__row.rowToggleSquare .components-base-control .components-base-control__help {
+//   margin-top: -6px;
+// }

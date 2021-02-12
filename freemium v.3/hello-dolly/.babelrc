@@ -1,0 +1,9 @@
+{
+	"presets": [ "@wordpress/default" ],
+	"plugins": [
+		// [ "@wordpress/babel-plugin-makepot", {
+		// 	"output": "languages/svg-flags.pot"
+		// } ],
+		"transform-class-properties"
+	]
+}

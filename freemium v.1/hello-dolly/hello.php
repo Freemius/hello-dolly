@@ -12,36 +12,50 @@
 	Author URI: http://ma.tt/
 	*/
 
-	// Create a helper function for easy SDK access.
-	function hd_fs() {
-		global $hd_fs;
-		if ( ! isset( $hd_fs ) ) {
-			// Include Freemius SDK.
-			require_once dirname(__FILE__) . '/freemius/start.php';
-
-			$hd_fs = fs_dynamic_init( array(
-				'id'          => '41',
-				'slug'        => 'hello-dolly',
-				'menu_slug'   => 'hello-dolly',
-				'public_key'  => 'pk_6609e8b6329c5aac8162eb71087c8',
-				'is_live'     => false,
-				'is_premium'  => true,
-				'has_addons'  => false,
-			) );
-		}
-
-		return $hd_fs;
-	}
-
-// Init Freemius.
-	hd_fs();
-
+  if ( ! function_exists( 'hd_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function hd_fs() {
+        global $hd_fs;
+  
+        if ( ! isset( $hd_fs ) ) {
+            // Include Freemius SDK.
+            require_once dirname(__FILE__) . '/freemius/start.php';
+  
+            $hd_fs = fs_dynamic_init( array(
+                'id'                  => '7787',
+                'slug'                => 'hello-dolly',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_9c10eb1132c89bee6402349c53724',
+                'is_premium'          => true,
+                // If your plugin is a serviceware, set this option to false.
+                'has_premium_version' => true,
+                'has_addons'          => false,
+                'has_paid_plans'      => true,
+                'menu'                => array(
+                    'slug'           => 'hello-dolly',
+                    'first-path'     => 'admin.php?page=hello-dolly',
+                    'support'        => false,
+                ),
+                // Set the SDK to work in a sandbox mode (for development & testing).
+                // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+                'secret_key'          => 'sk_WHc:K_I69a!3V:DO(J.EM[#fwM<Bc',
+            ) );
+        }
+  
+        return $hd_fs;
+    }
+  
+    // Init Freemius.
+    hd_fs();
+    // Signal that SDK was initiated.
+    do_action( 'hd_fs_loaded' );
+  }
 
 	/**
 	 * Adds simple menu item + settings page to admin dashboard.
 	 */
 	function hello_dolly_admin_menu() {
-		add_object_page(
+		add_menu_page(
 			__('Hello Dolly', 'hello-dolly'),
 			__('Hello Dolly', 'hello-dolly'),
 			'manage_options',
