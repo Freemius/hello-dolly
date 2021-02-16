@@ -294,5 +294,24 @@ Dream a little dream of me";
 	</style>
 	";
 	}
-
 	add_action( 'admin_head', 'dolly_css' );
+
+  function hello_dolly_register_block() {
+  
+      // automatically load dependencies and version
+      $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
+  
+      wp_register_script(
+          'hello-dolly-block-script',
+          plugins_url( 'build/index.js', __FILE__ ),
+          $asset_file['dependencies'],
+          $asset_file['version']
+      );
+  
+      register_block_type( 'hello-dolly/song-lyrics', array(
+          'apiVersion' => 2,
+          'editor_script' => 'hello-dolly-block-script',
+      ) );
+  
+  }
+  add_action( 'init', 'hello_dolly_register_block' );
