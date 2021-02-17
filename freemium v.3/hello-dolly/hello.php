@@ -299,19 +299,52 @@ Dream a little dream of me";
   function hello_dolly_register_block() {
   
       // automatically load dependencies and version
-      $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
+      // $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
   
-      wp_register_script(
-          'hello-dolly-block-script',
-          plugins_url( 'build/index.js', __FILE__ ),
-          $asset_file['dependencies'],
-          $asset_file['version']
-      );
+      // wp_register_script(
+      //     'hello-dolly-block-script',
+      //     plugins_url( 'build/index.js', __FILE__ ),
+      //     $asset_file['dependencies'],
+      //     $asset_file['version']
+      // );
   
       register_block_type( 'hello-dolly/song-lyrics', array(
-          'apiVersion' => 2,
-          'editor_script' => 'hello-dolly-block-script',
+//          'apiVersion' => 1,
+//          'editor_script' => 'hello-dolly-block-script',
       ) );
   
   }
   add_action( 'init', 'hello_dolly_register_block' );
+
+  /* Add scripts for block editor only */
+  function hello_dolly_enqueue_block_editor_scripts()
+  {
+    // automatically load dependencies and version
+    $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
+  
+    if (hd_fs()->is__premium_only()) {
+      $pro_asset_file = include( plugin_dir_path( __FILE__ ) . 'build/extend-blocks.asset.php');
+
+      wp_enqueue_script(
+        'hello-dolly-extend-blocks',
+        plugins_url( 'build/extend-blocks.js', __FILE__ ),
+        $pro_asset_file['dependencies'],
+        $pro_asset_file['version']
+      );
+      array_push($asset_file['dependencies'], 'hello-dolly-extend-blocks');
+    }
+
+    // Block editor script
+    wp_register_script(
+      'hello-dolly-block-script',
+      plugins_url( 'build/index.js', __FILE__ ),
+      $asset_file['dependencies'],
+      $asset_file['version']
+    );
+    $data = array(
+        'hello_dolly_plans' => 'add plan info zaq',
+    );
+    wp_localize_script('hello-dolly-block-script', 'hello_dolly_editor_data', $data);
+    wp_enqueue_script('hello-dolly-block-script');
+  }  
+  add_action('enqueue_block_editor_assets', 'hello_dolly_enqueue_block_editor_scripts');

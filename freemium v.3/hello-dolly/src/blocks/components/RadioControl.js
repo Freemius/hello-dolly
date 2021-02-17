@@ -6,7 +6,7 @@ export const SongRadioControl = (props) => {
   return (
   <div>
     <RadioControl
-      label="Select Song:"
+      label="Select Song"
       selected={ song }
       options={ [
           { label: 'Hello Dolly', value: 'Hello Dolly' },

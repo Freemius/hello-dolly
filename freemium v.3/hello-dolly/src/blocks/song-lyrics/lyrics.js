@@ -1,4 +1,6 @@
-export const lyrics = {
+const { applyFilters, doAction, createHooks } = wp.hooks;
+
+let lyrics = {
   'Hello Dolly': `Hello, Dolly
   Well, hello, Dolly
   It's so nice to have you back where you belong
@@ -96,3 +98,7 @@ export const lyrics = {
   Promise to me you'll dream
   Dream a little dream of me`
 };
+
+lyrics = applyFilters('song-lyrics', lyrics);
+
+exports.lyrics = lyrics;
