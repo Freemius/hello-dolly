@@ -1,6 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 import { SongRadioControl } from '../components/RadioControl';
+import { Markup } from '../components/Markup';
 import { lyrics } from './lyrics';
 import { update } from '@wordpress/icons';
 const { applyFilters, doAction } = wp.hooks;
@@ -93,7 +94,7 @@ registerBlockType( 'hello-dolly/song-lyrics', {
               </BlockControls>
             }
 
-            <span style={{fontWeight:'bold'}}>{song}</span>: {lyric} {showLineNumber && (<span style={{fontStyle:'italic'}}>({lineNumber})</span>)}
+            <Markup {...this.props.attributes} />
 
             <InspectorControls>
               <PanelBody className="faq-themes-panel" title={__("Song Lyrics", "hello-dolly")} initialOpen={true}>
@@ -118,10 +119,6 @@ registerBlockType( 'hello-dolly/song-lyrics', {
       }
     },
     save(props) {
-      const { attributes: { song, lyric, lineNumber, showLineNumber } } = props;
-
-      return <div style={blockStyle}>
-        <span style={{fontWeight:'bold'}}>{song}</span>: {lyric} {showLineNumber && (<span style={{fontStyle:'italic'}}>({lineNumber})</span>)}
-      </div>;
+      return <Markup {...props.attributes} />;
     },
 } );

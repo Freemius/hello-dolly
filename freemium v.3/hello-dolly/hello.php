@@ -319,6 +319,8 @@ Dream a little dream of me";
   /* Add scripts for block editor only */
   function hello_dolly_enqueue_block_editor_scripts()
   {
+    $deps = ['wp-plugins', 'wp-element', 'wp-edit-post', 'wp-i18n', 'wp-api-request', 'wp-data', 'wp-hooks', 'wp-plugins', 'wp-components', 'wp-blocks', 'wp-editor', 'wp-compose'];
+
     // automatically load dependencies and version
     $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
   
@@ -328,7 +330,7 @@ Dream a little dream of me";
       wp_enqueue_script(
         'hello-dolly-extend-blocks',
         plugins_url( 'build/extend-blocks.js', __FILE__ ),
-        $pro_asset_file['dependencies'],
+        $deps,
         $pro_asset_file['version']
       );
       array_push($asset_file['dependencies'], 'hello-dolly-extend-blocks');
@@ -338,7 +340,7 @@ Dream a little dream of me";
     wp_register_script(
       'hello-dolly-block-script',
       plugins_url( 'build/index.js', __FILE__ ),
-      $asset_file['dependencies'],
+      $deps,
       $asset_file['version']
     );
     $data = array(

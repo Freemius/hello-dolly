@@ -90,8 +90,13 @@
 /*!**********************************!*\
   !*** ./src/pro/extend-blocks.js ***!
   \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 
 var _wp$hooks = wp.hooks,
     addAction = _wp$hooks.addAction,
@@ -105,14 +110,39 @@ var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
     PanelRow = _wp$components.PanelRow,
     ToggleControl = _wp$components.ToggleControl;
+var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
+var InspectorControls = wp.editor.InspectorControls;
 var _wp$element = wp.element,
     Component = _wp$element.Component,
-    Fragment = _wp$element.Fragment;
+    Fragment = _wp$element.Fragment,
+    cloneElement = _wp$element.cloneElement;
 var __ = wp.i18n.__;
 addFilter('song-lyrics', 'hello-dolly/song-lyrics', function (lyrics) {
-  console.log('Lyrics: ', lyrics);
+  //console.log('Lyrics: ', lyrics);
   return lyrics;
 });
+addFilter('extra-markup', 'hello-dolly/song-lyrics', function (component, props) {
+  var song = props.song,
+      lyric = props.lyric,
+      lineNumber = props.lineNumber,
+      showLineNumber = props.showLineNumber;
+  return showLineNumber ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    style: {
+      fontStyle: 'italic'
+    }
+  }, "(", lineNumber, ")") : '';
+});
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["element"]; }());
 
 /***/ })
 

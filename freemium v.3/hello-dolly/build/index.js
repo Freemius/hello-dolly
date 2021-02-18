@@ -7250,6 +7250,43 @@ var wordpress = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEl
 
 /***/ }),
 
+/***/ "./src/blocks/components/Markup.js":
+/*!*****************************************!*\
+  !*** ./src/blocks/components/Markup.js ***!
+  \*****************************************/
+/*! exports provided: Markup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Markup", function() { return Markup; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+var _wp$hooks = wp.hooks,
+    applyFilters = _wp$hooks.applyFilters,
+    doAction = _wp$hooks.doAction,
+    createHooks = _wp$hooks.createHooks;
+var Fragment = wp.element.Fragment;
+function Markup(props) {
+  var song = props.song,
+      lyric = props.lyric,
+      lineNumber = props.lineNumber,
+      showLineNumber = props.showLineNumber;
+  var extra_markup = applyFilters('extra-markup', '', props);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    style: {
+      fontWeight: 'bold'
+    }
+  }, song), ": ", lyric, " ", showLineNumber && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+    style: {
+      fontStyle: 'italic'
+    }
+  }, "(", lineNumber, ")"));
+}
+
+/***/ }),
+
 /***/ "./src/blocks/components/RadioControl.js":
 /*!***********************************************!*\
   !*** ./src/blocks/components/RadioControl.js ***!
@@ -7323,9 +7360,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_RadioControl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/RadioControl */ "./src/blocks/components/RadioControl.js");
-/* harmony import */ var _lyrics__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lyrics */ "./src/blocks/song-lyrics/lyrics.js");
-/* harmony import */ var _lyrics__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_lyrics__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
+/* harmony import */ var _components_Markup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Markup */ "./src/blocks/components/Markup.js");
+/* harmony import */ var _lyrics__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./lyrics */ "./src/blocks/song-lyrics/lyrics.js");
+/* harmony import */ var _lyrics__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_lyrics__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/index.js");
 
 
 
@@ -7337,6 +7375,7 @@ __webpack_require__.r(__webpack_exports__);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -7440,26 +7479,18 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__["registerBlockType"])('hel
           label: "Options"
         }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(ToolbarButton, {
           onClick: function onClick() {
-            return _this2.updateLyric(song, _lyrics__WEBPACK_IMPORTED_MODULE_10__["lyrics"][song], setAttributes);
+            return _this2.updateLyric(song, _lyrics__WEBPACK_IMPORTED_MODULE_11__["lyrics"][song], setAttributes);
           },
-          icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["update"],
+          icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["update"],
           label: "Refresh lyric"
-        }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("span", {
-          style: {
-            fontWeight: 'bold'
-          }
-        }, song), ": ", lyric, " ", showLineNumber && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("span", {
-          style: {
-            fontStyle: 'italic'
-          }
-        }, "(", lineNumber, ")"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelBody, {
+        }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_components_Markup__WEBPACK_IMPORTED_MODULE_10__["Markup"], this.props.attributes), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelBody, {
           className: "faq-themes-panel",
           title: __("Song Lyrics", "hello-dolly"),
           initialOpen: true
         }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_components_RadioControl__WEBPACK_IMPORTED_MODULE_9__["SongRadioControl"], {
           updateLyric: this.updateLyric,
           song: song,
-          lyrics: _lyrics__WEBPACK_IMPORTED_MODULE_10__["lyrics"],
+          lyrics: _lyrics__WEBPACK_IMPORTED_MODULE_11__["lyrics"],
           setAttributes: setAttributes
         })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(Button, {
           class: "dashicons-image-rotate",
@@ -7468,7 +7499,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__["registerBlockType"])('hel
           },
           isLink: true,
           onClick: function onClick() {
-            return _this2.updateLyric(song, _lyrics__WEBPACK_IMPORTED_MODULE_10__["lyrics"][song], setAttributes);
+            return _this2.updateLyric(song, _lyrics__WEBPACK_IMPORTED_MODULE_11__["lyrics"][song], setAttributes);
           }
         }, "Refresh song lyric")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(CheckboxControl, {
           label: "Show line number?",
@@ -7486,22 +7517,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__["registerBlockType"])('hel
     return edit;
   }(Component),
   save: function save(props) {
-    var _props$attributes = props.attributes,
-        song = _props$attributes.song,
-        lyric = _props$attributes.lyric,
-        lineNumber = _props$attributes.lineNumber,
-        showLineNumber = _props$attributes.showLineNumber;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
-      style: blockStyle
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("span", {
-      style: {
-        fontWeight: 'bold'
-      }
-    }, song), ": ", lyric, " ", showLineNumber && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("span", {
-      style: {
-        fontStyle: 'italic'
-      }
-    }, "(", lineNumber, ")"));
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_components_Markup__WEBPACK_IMPORTED_MODULE_10__["Markup"], props.attributes);
   }
 });
 
