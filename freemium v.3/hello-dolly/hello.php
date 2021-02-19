@@ -324,16 +324,17 @@ Dream a little dream of me";
     // automatically load dependencies and version
     $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
   
-    if (hd_fs()->is__premium_only()) {
-      $pro_asset_file = include( plugin_dir_path( __FILE__ ) . 'build/extend-blocks.asset.php');
+    if (hd_fs()->is_paying__premium_only()) {
 
-      wp_enqueue_script(
-        'hello-dolly-extend-blocks',
-        plugins_url( 'build/extend-blocks.js', __FILE__ ),
-        $deps,
-        $pro_asset_file['version']
-      );
-      array_push($asset_file['dependencies'], 'hello-dolly-extend-blocks');
+        $pro_asset_file = include( plugin_dir_path( __FILE__ ) . 'build/extend-blocks.asset.php');
+
+        wp_enqueue_script(
+          'hello-dolly-extend-blocks',
+          plugins_url( 'build/extend-blocks.js', __FILE__ ),
+          $deps,
+          $pro_asset_file['version']
+        );
+        array_push($asset_file['dependencies'], 'hello-dolly-extend-blocks');
     }
 
     // Block editor script

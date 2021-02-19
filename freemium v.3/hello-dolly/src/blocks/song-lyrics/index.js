@@ -3,7 +3,6 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { SongRadioControl } from '../components/RadioControl';
 import { Markup } from '../components/Markup';
 import { lyrics } from './lyrics';
-import { update } from '@wordpress/icons';
 const { applyFilters, doAction } = wp.hooks;
 
 const { Component } = wp.element;
@@ -48,7 +47,7 @@ registerBlockType( 'hello-dolly/song-lyrics', {
       },
       showLineNumber: {
         type: 'boolean',
-        default: true
+        default: false
       },
       align: {
         type: 'string',
@@ -57,16 +56,32 @@ registerBlockType( 'hello-dolly/song-lyrics', {
     },
     edit: class extends Component {
 
+      componentDidMount() {
+
+        const { attributes: { song, lyric }, setAttributes } = this.props;
+
+        if(!lyrics.hasOwnProperty(song)) {
+          setAttributes({
+            song: 'Hello Dolly',
+            lyric: lyrics['Hello Dolly'].split(/\n/)[0],
+            lineNumber: 1
+          });  
+        };            
+      }
+
       constructor(props) {
         super(props);
         this.props = props;
         this.updateLyric = this.updateLyric.bind(this);
       }
 
-      updateLyric(song, rawLines, setAttributes) {
-        //console.log(rawLines);
+      updateLyric(song) {
 
-        var lines = rawLines.split(/\n/);
+        const {
+          setAttributes,
+        } = this.props;
+
+        var lines = lyrics[song].split(/\n/);
         var randLineNum = Math.floor(Math.random() * lines.length);
         setAttributes({
           song: song,
@@ -84,34 +99,23 @@ registerBlockType( 'hello-dolly/song-lyrics', {
 
         const lbl = (showLineNumber === true) ? 'TRUE' : 'FALSE';
 
+        const toolbar_refresh_lyric = applyFilters('toolbar-refresh-lyric', '', song, this.updateLyric);
+        const inspector_refresh_lyric = applyFilters('inspector-refresh-lyric', '', song, this.updateLyric);
+        const inspector_line_number = applyFilters('inspector-line-number', '', showLineNumber, setAttributes);
+
         return (
           <div style={blockStyle}>
-            {
-              <BlockControls>
-                <Toolbar label="Options">
-                  <ToolbarButton onClick={() => this.updateLyric(song, lyrics[song], setAttributes)} icon={ update } label="Refresh lyric" />
-                </Toolbar>
-              </BlockControls>
-            }
+            {toolbar_refresh_lyric}
 
             <Markup {...this.props.attributes} />
 
             <InspectorControls>
               <PanelBody className="faq-themes-panel" title={__("Song Lyrics", "hello-dolly")} initialOpen={true}>
                 <PanelRow>
-                  <SongRadioControl updateLyric={this.updateLyric} song={song} lyrics={lyrics} setAttributes={setAttributes} />
+                  <SongRadioControl updateLyric={this.updateLyric} song={song} />
                 </PanelRow>
-                <PanelRow>
-                  <Button class="dashicons-image-rotate" style={{marginTop:'-30px'}} isLink onClick={() => this.updateLyric(song, lyrics[song], setAttributes)}>Refresh song lyric</Button>
-                </PanelRow>
-                <PanelRow>
-                  <CheckboxControl
-                    label="Show line number?"
-                    help="Optionally display the lyric line number"
-                    checked={ showLineNumber }
-                    onChange={ ( option ) => { setAttributes({showLineNumber: option}); } }              
-                  />
-                </PanelRow>
+                {inspector_refresh_lyric}
+                {inspector_line_number}
               </PanelBody>
             </InspectorControls>
           </div>

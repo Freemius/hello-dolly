@@ -1,21 +1,19 @@
 import { RadioControl } from '@wordpress/components';
- 
+const { applyFilters, doAction, createHooks } = wp.hooks;
+
 export const SongRadioControl = (props) => {
-  const { song, setAttributes, lyrics, updateLyric } = props;
+  const { song, updateLyric } = props;
+
+  let song_options = applyFilters('song-list', [{ label: 'Hello Dolly', value: 'Hello Dolly' }]);
 
   return (
   <div>
     <RadioControl
       label="Select Song"
       selected={ song }
-      options={ [
-          { label: 'Hello Dolly', value: 'Hello Dolly' },
-          { label: 'Summertime', value: 'Summertime' },
-          { label: 'Wonderful World', value: 'Wonderful World' },
-          { label: 'Dream a Little Dream', value: 'Dream a Little Dream' },
-      ] }
+      options={ song_options }
       onChange={ ( option ) => {
-        updateLyric(option, lyrics[option], setAttributes);
+        updateLyric(option);
       } }
     />
   </div>
