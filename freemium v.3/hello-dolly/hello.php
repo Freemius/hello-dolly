@@ -345,7 +345,7 @@ Dream a little dream of me";
       $asset_file['version']
     );
     $data = array(
-        'hello_dolly_plans' => 'add plan info zaq',
+        'current_plan' => hd_fs()->get_plan_name(),
     );
     wp_localize_script('hello-dolly-block-script', 'hello_dolly_editor_data', $data);
     wp_enqueue_script('hello-dolly-block-script');

@@ -1,4 +1,5 @@
 const { applyFilters, doAction, createHooks } = wp.hooks;
+const plan = hello_dolly_editor_data ? hello_dolly_editor_data.current_plan : null;
 
 let lyrics = {
   'Hello Dolly': `Hello, Dolly
@@ -32,5 +33,8 @@ let lyrics = {
 };
 
 lyrics = applyFilters('song-lyrics', lyrics);
+
+// console.log('PLAN: ', plan);
+// console.log('SONGS: ', Object.keys(lyrics));
 
 exports.lyrics = lyrics;

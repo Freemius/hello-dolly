@@ -3,8 +3,9 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { SongRadioControl } from '../components/RadioControl';
 import { Markup } from '../components/Markup';
 import { lyrics } from './lyrics';
-const { applyFilters, doAction } = wp.hooks;
+import { update } from '@wordpress/icons';
 
+const { applyFilters, doAction } = wp.hooks;
 const { Component } = wp.element;
 const {
 	InspectorControls,
@@ -19,7 +20,6 @@ const {
   Toolbar,
   ToolbarButton
 } = wp.components;
-//const { rotateLeft, rotateRight } = wp.icons;
 
 const { __ } = wp.i18n;
 const blockStyle = {padding:'20px'};
@@ -47,7 +47,7 @@ registerBlockType( 'hello-dolly/song-lyrics', {
       },
       showLineNumber: {
         type: 'boolean',
-        default: false
+        default: true
       },
       align: {
         type: 'string',
@@ -56,8 +56,14 @@ registerBlockType( 'hello-dolly/song-lyrics', {
     },
     edit: class extends Component {
 
-      componentDidMount() {
+      constructor(props) {
+        super(props);
+        this.props = props;
+        this.updateLyric = this.updateLyric.bind(this);
+      }
 
+      componentDidMount() {
+        
         const { attributes: { song, lyric }, setAttributes } = this.props;
 
         if(!lyrics.hasOwnProperty(song)) {
@@ -67,12 +73,6 @@ registerBlockType( 'hello-dolly/song-lyrics', {
             lineNumber: 1
           });  
         };            
-      }
-
-      constructor(props) {
-        super(props);
-        this.props = props;
-        this.updateLyric = this.updateLyric.bind(this);
       }
 
       updateLyric(song) {
@@ -105,7 +105,12 @@ registerBlockType( 'hello-dolly/song-lyrics', {
 
         return (
           <div style={blockStyle}>
-            {toolbar_refresh_lyric}
+
+            <BlockControls>
+              <Toolbar label="Options">
+                <ToolbarButton onClick={() => this.updateLyric(song)} icon={ update } label="Refresh lyric" />
+              </Toolbar>
+            </BlockControls>
 
             <Markup {...this.props.attributes} />
 
@@ -114,7 +119,9 @@ registerBlockType( 'hello-dolly/song-lyrics', {
                 <PanelRow>
                   <SongRadioControl updateLyric={this.updateLyric} song={song} />
                 </PanelRow>
-                {inspector_refresh_lyric}
+                <PanelRow>
+                  <Button class="dashicons-image-rotate" style={{marginTop:'-30px'}} isLink onClick={() => this.updateLyric(song)}>Refresh song lyric</Button>
+                </PanelRow>
                 {inspector_line_number}
               </PanelBody>
             </InspectorControls>
