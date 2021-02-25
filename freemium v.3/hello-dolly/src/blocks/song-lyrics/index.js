@@ -47,7 +47,7 @@ registerBlockType( 'hello-dolly/song-lyrics', {
       },
       showLineNumber: {
         type: 'boolean',
-        default: true
+        default: false
       },
       align: {
         type: 'string',
@@ -66,13 +66,15 @@ registerBlockType( 'hello-dolly/song-lyrics', {
         
         const { attributes: { song, lyric }, setAttributes } = this.props;
 
+        // if downgrading and the currently selected song is not available
         if(!lyrics.hasOwnProperty(song)) {
           setAttributes({
             song: 'Hello Dolly',
             lyric: lyrics['Hello Dolly'].split(/\n/)[0],
-            lineNumber: 1
+            lineNumber: 1,
+            showLineNumber: false
           });  
-        };            
+        };
       }
 
       updateLyric(song) {
@@ -98,9 +100,6 @@ registerBlockType( 'hello-dolly/song-lyrics', {
         } = this.props;
 
         const lbl = (showLineNumber === true) ? 'TRUE' : 'FALSE';
-
-        const toolbar_refresh_lyric = applyFilters('toolbar-refresh-lyric', '', song, this.updateLyric);
-        const inspector_refresh_lyric = applyFilters('inspector-refresh-lyric', '', song, this.updateLyric);
         const inspector_line_number = applyFilters('inspector-line-number', '', showLineNumber, setAttributes);
 
         return (
