@@ -10,6 +10,8 @@
 	Author: Matt Mullenweg
 	Version: 1.7.2
 	Author URI: http://ma.tt/
+
+  @fs_premium_only /build/extend-blocks.asset.php, /build/extend-blocks.js
 	*/
 
 if ( ! function_exists( 'hd_fs' ) ) {
