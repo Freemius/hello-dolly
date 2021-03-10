@@ -130,9 +130,7 @@ if ( ! function_exists( 'hd_fs' ) ) {
 			<form method='post' action="">
 				<?php foreach ( $songs as $song ) : ?>
 					<?php $song_id = preg_replace( '/[^\da-z]/i', '', strtolower( $song ) ) ?>
-					<p><label for="<?php echo $song_id ?>"><input type="radio" id="<?php echo $song_id ?>"
-					                                              name="selected_song"
-					                                              value="<?php echo $song ?>" <?php checked( $song, $selected_song ) ?> /> <?php echo $song ?>
+					<p><label for="<?php echo $song_id ?>"><input type="radio" id="<?php echo $song_id ?>" name="selected_song" value="<?php echo $song ?>" <?php checked( $song, $selected_song ) ?> /> <?php echo $song ?>
 						</label></p>
 				<?php endforeach ?>
 				<p class='submit'>

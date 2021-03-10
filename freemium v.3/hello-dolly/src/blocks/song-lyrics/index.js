@@ -52,7 +52,7 @@ registerBlockType( 'hello-dolly/song-lyrics', {
       align: {
         type: 'string',
         default: 'wide'
-      },      
+      },
     },
     edit: class extends Component {
 

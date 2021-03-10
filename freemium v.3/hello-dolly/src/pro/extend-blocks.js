@@ -20,13 +20,6 @@ const {
   BlockControls
 } = wp.blockEditor;
 
-addFilter('song-lyrics', 'hello-dolly/song-lyrics', function (lyrics) {
-
-  //console.log('Lyrics: ', lyrics);
-
-	return lyrics;
-});
-
 addFilter('inspector-line-number', 'hello-dolly/song-lyrics', function (component, showLineNumber, setAttributes) {
   return (
     <PanelRow>
