@@ -1,0 +1,22 @@
+{
+  "name": "hello-dolly",
+  "version": "1.0.0",
+  "description": "Hello Dolly Freemium",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "build:custom": "wp-scripts build src/blocks/song-lyrics/index.js src/pro/extend-blocks.js",
+    "format:js": "wp-scripts format-js",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "start:custom": "wp-scripts start src/blocks/song-lyrics/index.js src/pro/extend-blocks.js",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "author": "David Gwyer",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@wordpress/icons": "^2.9.1",
+    "@wordpress/scripts": "13.0.3"
+  }
+}
