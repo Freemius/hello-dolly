@@ -1,0 +1,4 @@
+[submodule "freemium v.3/hello-dolly/freemius"]
+	path = freemium v.3/hello-dolly/freemius
+	url = https://github.com/Freemius/wordpress-sdk.git
+	branch = master
