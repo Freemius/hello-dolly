@@ -38,9 +38,6 @@ if ( ! function_exists( 'hd_fs' ) ) {
                   'first-path'     => 'admin.php?page=hello-dolly',
                   'support'        => false,
               ),
-              // Set the SDK to work in a sandbox mode (for development & testing).
-              // IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-              'secret_key'          => 'sk_WHc:K_I69a!3V:DO(J.EM[#fwM<Bc',
           ) );
       }
 
